@@ -2,21 +2,19 @@
 
 include ../../mk/toolchain.mk
 
-ASFLAGS = -march=rv32i -mabi=ilp32
-LDFLAGS = --oformat=elf32-littleriscv
-
-OBJECT = main.o clz.o decrypt.p encrypt.o getcycles.o getinstret.o sparkle.o ticks.o
-
-main.elf: $(OBJECT)
-	
+ASFLAGS = -march=rv32i_zicsr -mabi=ilp32  -Wall
+# LDFLAGS = --oformat=elf32-littleriscv
+TMP = riscv-none-elf-gcc
+%.s: %.c
+	$(TMP) $(ASFLAGS) -s -o $@ $<
 
 %.o: %.s
-	$(CROSS_COMPILE)as -R $(ASFLAGS) -o $@ $<
+	$(TMP) $(ASFLAGS) -c -o  $@ $<
 
-all: hw.elf32
+all: main.elf32
 
-hello.elf: hello.oformat
-	$(CROSS_COMPILE)ld -o $@ -T hello.ld $(LDFLAGS) $<
+main.elf: hello.oformat
+	$(TMP)ld -o $@ -T hello.ld $<
 
 clean:
-	$(RM) hello.elf hello.o
+	$(RM) main.elf main.o
