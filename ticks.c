@@ -19,19 +19,3 @@ static inline ticks getticks(void)
     result = (((uint64_t) h) << 32) | ((uint64_t) l);
     return result;
 }
-
-static uint64_t fib(uint64_t n)
-{
-    if (n <= 1)
-        return n;
-    return fib(n - 1) + fib(n - 2);
-}
-
-int main()
-{
-    ticks t0 = getticks();
-    fib(19);
-    ticks t1 = getticks();
-    printf("elapsed cycle: %" PRIu64 "\n", t1 - t0);
-    return 0;
-}
