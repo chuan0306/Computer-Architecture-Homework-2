@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdint.h>
-#include "clz.c"
-#include "encrypt.c"
-#include "decrypt.c"
+// #include "clz.c"
+// #include "encrypt.c"
+// #include "decrypt.c"
 
 extern uint64_t get_cycles();
 extern uint64_t get_instret();
-// extern void sparkle_asm(unsigned int *state, unsigned int ns);
 
 #define WORDS 12
 #define ROUNDS 7
@@ -43,4 +42,35 @@ int main()
     // sparkle_asm(state, ROUNDS);
 
     return 0;
+}
+
+uint16_t count_leading_zeros(uint64_t x)
+{
+    x |= (x >> 1);
+    x |= (x >> 2);
+    x |= (x >> 4);
+    x |= (x >> 8);
+    x |= (x >> 16);
+    x |= (x >> 32);
+
+    x -= ((x >> 1) & 0x5555555555555555);
+    x = ((x >> 2) & 0x3333333333333333) + (x & 0x3333333333333333);
+    x = ((x >> 4) + x) & 0x0f0f0f0f0f0f0f0f;
+    x += (x >> 8);
+    x += (x >> 16);
+    x += (x >> 32);
+
+    return (64 - (x & 0x7f));
+}
+
+void decrypt(uint64_t *data, uint64_t key)
+{
+    uint16_t leading_zeros = count_leading_zeros(key);
+    *data ^= (key << leading_zeros);
+}
+
+void encrypt(uint64_t *data, uint64_t key)
+{
+    uint16_t leading_zeros = count_leading_zeros(key);
+    *data ^= (key << leading_zeros);
 }
