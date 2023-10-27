@@ -1,0 +1,2 @@
+- The file `hw1.s` is contributed by [kk908676](https://hackmd.io/@c3WNnG7RRK2J17ifSiezZA/H1jhh2t6n).
+- The `Makefile` is used to compile the `hw1.s` into `hw1.elf` using [rv32emu](https://github.com/sysprog21/rv32emu).
