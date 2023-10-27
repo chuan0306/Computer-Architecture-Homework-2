@@ -3,7 +3,7 @@
     str2: .string "\nEncrypted Data:"
     str3: .string "\nDecrypted Data:"
 .text
-.global _start
+    .global _start
 _start:
     # initial setting
     li    s2, 0x01234567
