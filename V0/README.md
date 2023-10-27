@@ -1,3 +1,0 @@
-- The `main.c` file is implemented by [kk908676](https://hackmd.io/@c3WNnG7RRK2J17ifSiezZA/H1jhh2t6n).
-- The `getcycle.S` and `getinstret.S` file are contributed by [rv32emu](https://github.com/sysprog21/rv32emu/tree/master/tests/perfcounter)
-- The `Makefile` is used to compile the files mentioned above into  `main.s`, `main.o`, `getcycles.o` and `getinstret.o` then transform them into the executable file `main.elf` by using [rv32emu](https://github.com/sysprog21/rv32emu).
