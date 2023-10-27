@@ -3,6 +3,7 @@
     str2: .string "\nEncrypted Data:"
     str3: .string "\nDecrypted Data:"
 .text
+.globl Main
 Main:
     # initial setting
     li    s2, 0x01234567
