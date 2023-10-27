@@ -3,8 +3,8 @@
     str2: .string "\nEncrypted Data:"
     str3: .string "\nDecrypted Data:"
 .text
-.global Main
-Main:
+.global _start
+_start:
     # initial setting
     li    s2, 0x01234567
     li    s3, 0x89abcdef
