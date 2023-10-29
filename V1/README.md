@@ -1,1 +1,4 @@
-
+- The `main_v1.s` file is used to executed on [Ripes](https://github.com/mortbopet/Ripes) with specified system call setting.
+  - The system call setting in the `main_v1.s` file cannot be emulated on [rv32emu](https://github.com/sysprog21/rv32emu)
+- The `Makefile` is used to compile the `main_v1.s` into the `main_v1.o` and the `main_v1.elf` files.
+- The `main_v1.elf` file can be emulated on [rv32emu](https://github.com/sysprog21/rv32emu)
