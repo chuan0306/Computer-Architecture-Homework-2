@@ -1,25 +1,35 @@
+.global main
+.set SYSEXIT, 93
+.set SYSWRITE, 64
+.set SYSPRINTFHEX, 31
+.set SYSPRINTFINT, 32
 .data
     str1: .string "Oringinal Data:"
     str2: .string "\nEncrypted Data:"
     str3: .string "\nDecrypted Data:"
 .text
-.global main
 start:
 main:
+    jal   ra, get_cycles
+    mv	  s6, a3
+    #li	  a0, 1
+    #mv    a2, s6
+    #li    a7, 32
+    #ecall
     # initial setting
     li    s2, 0x01234567
     li    s3, 0x89abcdef
     li    s4, 0x0
     li    s5, 0x000000aa
-    # printf str1
-    la    a0, str1
-    li    a7, 4
+    # printf test_data[0~31]
+    li	  a0, 1
+    mv    a4, s4
+    li    a7, SYSPRINTFHEX
     ecall
-    # print test data
-    mv    a0, s4
-    li    a7, 34
-    ecall
-    mv    a0, s5
+    # printf test_data[32~63]
+    li	  a0, 1
+    mv    a4, s5
+    li    a7, SYSPRINTFHEX
     ecall
 NKG:
     jal CLZ
@@ -38,28 +48,28 @@ ct:
 Enc:
     xor   s4, s0, s4
     xor   s5, s1, s5
-    # printf str2
-    la    a0, str2
-    li    a7, 4
+    # printf
+    li	  a0, 1
+    mv    a4, s4
+    li    a7, SYSPRINTFHEX
     ecall
-    # print `encrypted data`
-    mv    a0, s4
-    li    a7, 34
-    ecall
-    mv    a0, s5
+    # printf
+    li	  a0, 1
+    mv    a4, s5
+    li    a7, SYSPRINTFHEX
     ecall
 Dec:
     xor   s4, s0, s4
     xor   s5, s1, s5
-    # printf str2
-    la    a0, str3
-    li    a7, 4
+    # printf
+    li	  a0, 1
+    mv    a4, s4
+    li    a7, SYSPRINTFHEX
     ecall
-    # print `decrypted data`
-    mv    a0, s4
-    li    a7, 34
-    ecall
-    mv    a0, s5
+    # printf
+    li	  a0, 1
+    mv    a4, s5
+    li    a7, SYSPRINTFHEX
     ecall
     j     End
 CLZ:
@@ -138,5 +148,19 @@ CLZ:
     lw    ra, 0(sp)
     addi  sp, sp, 4
     jr    ra
+get_cycles:
+    csrr  a1, cycleh
+    csrr  a3, cycle
+    csrr  a2, cycleh
+    bne   a1, a2, get_cycles
+    ret	
 End:
-    nop 
+    jal   ra, get_cycles
+    sub   a3, a3, s6
+    li	  a0, 1
+    mv    a2, a3
+    li    a7, 32	
+    ecall
+    li    a0, 0
+    li	  a7, SYSEXIT
+    ecall
