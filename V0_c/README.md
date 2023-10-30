@@ -1,1 +1,2 @@
-
+- The `main.c` file has been modified from [kk908676](https://hackmd.io/@c3WNnG7RRK2J17ifSiezZA/H1jhh2t6n).
+- The `getcycles.s` file comes from [rv32emu](https://github.com/sysprog21/rv32emu/blob/master/tests/perfcounter/getcycles.S).
