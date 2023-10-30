@@ -1,2 +1,3 @@
-- The file `hw1.s` is contributed by [kk908676](https://hackmd.io/@c3WNnG7RRK2J17ifSiezZA/H1jhh2t6n).
-- The `Makefile` is used to compile the `hw1.s` into `hw1.elf` using [rv32emu](https://github.com/sysprog21/rv32emu).
+- The file `hw1.s` has been modified from [kk908676](https://hackmd.io/@c3WNnG7RRK2J17ifSiezZA/H1jhh2t6n) in order to execute correct system call on [rv32emu](https://github.com/sysprog21/rv32emu).
+- And the `hw1.s` is used as a  benchmark to measure the time and space complecities.
+- The `Makefile` is used to compile `hw1.s` into `hw1.elf` using [rv32emu](https://github.com/sysprog21/rv32emu).
